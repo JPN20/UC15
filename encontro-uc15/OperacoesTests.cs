@@ -1,14 +1,12 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Tester.Core;
+using Xunit;
 
-namespace Tester.MSTest
+namespace Tester.XUnit
 {
-    // classe de testes que você queira executar
-    [TestClass]
     public class OperacoesTests
     {
         // método de teste
-        [TestMethod]
+        [Fact]
         // descricao do teste
         public void SomarDoisNumeros_RetornaResultado()
         {
@@ -18,7 +16,18 @@ namespace Tester.MSTest
             // act – agir – execução/chamada do método
             var resultado = Operacoes.Somar(primeiroNumero, segundoNumero);
             // Assert – comportamento esperado, comportamento obtido
-            Assert.AreEqual(30, resultado);
+            Assert.Equal(30, resultado);
         }
+
+        [Theory]
+        [InlineData(1, 2, 3)]
+        [InlineData(2, 3, 5)]
+        public void SomarDoisNumeros_RetornaResultado_ParaUmaListaDeValores(double primeiroNumero, double segundoNumero, double resultadoEsperado)
+        {
+            var resultadoDaSoma = Operacoes.Somar(primeiroNumero, segundoNumero);
+
+            Assert.Equal(resultadoEsperado, resultadoDaSoma);
+        }
+
     }
 }
